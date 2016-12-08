@@ -518,7 +518,7 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="imageCell" rowHeight="560" id="DqR-OZ-zwe">
-                                <rect key="frame" x="0.0" y="55.5" width="375" height="560"/>
+                                <rect key="frame" x="0.0" y="56" width="375" height="560"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DqR-OZ-zwe" id="Sjw-T6-avF">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="559"/>
@@ -610,7 +610,7 @@
                                 </tableViewCellContentView>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="textCell" rowHeight="560" id="W7k-6R-8z5">
-                                <rect key="frame" x="0.0" y="615.5" width="375" height="560"/>
+                                <rect key="frame" x="0.0" y="616" width="375" height="560"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="W7k-6R-8z5" id="0Nc-Pa-aN1">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="559"/>
