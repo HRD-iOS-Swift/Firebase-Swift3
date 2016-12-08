@@ -12,6 +12,7 @@
 		6F9170BA1DF9594800AC4807 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F9170B81DF9594800AC4807 /* Main.storyboard */; };
 		6F9170BC1DF9594800AC4807 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F9170BB1DF9594800AC4807 /* Assets.xcassets */; };
 		6F9170BF1DF9594800AC4807 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F9170BD1DF9594800AC4807 /* LaunchScreen.storyboard */; };
+		EC0CF983CB8D5FDC335E8171 /* Pods_FirebaseSwift3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BE6E1161DEAB1849A7D2C80 /* Pods_FirebaseSwift3.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,9 @@
 		6F9170BB1DF9594800AC4807 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6F9170BE1DF9594800AC4807 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6F9170C01DF9594800AC4807 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7BE6E1161DEAB1849A7D2C80 /* Pods_FirebaseSwift3.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FirebaseSwift3.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D1131A7F92E36FE93BA5705 /* Pods-FirebaseSwift3.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseSwift3.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseSwift3/Pods-FirebaseSwift3.debug.xcconfig"; sourceTree = "<group>"; };
+		C983F1345590DDF059A30F6B /* Pods-FirebaseSwift3.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseSwift3.release.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseSwift3/Pods-FirebaseSwift3.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +33,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC0CF983CB8D5FDC335E8171 /* Pods_FirebaseSwift3.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +45,8 @@
 			children = (
 				6F9170B31DF9594800AC4807 /* FirebaseSwift3 */,
 				6F9170B21DF9594800AC4807 /* Products */,
+				9C7CFDB0E8A2CAC0933EC210 /* Pods */,
+				A3A4C167874DDA8E0E0E45DD /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -64,6 +71,23 @@
 			path = FirebaseSwift3;
 			sourceTree = "<group>";
 		};
+		9C7CFDB0E8A2CAC0933EC210 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8D1131A7F92E36FE93BA5705 /* Pods-FirebaseSwift3.debug.xcconfig */,
+				C983F1345590DDF059A30F6B /* Pods-FirebaseSwift3.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		A3A4C167874DDA8E0E0E45DD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7BE6E1161DEAB1849A7D2C80 /* Pods_FirebaseSwift3.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -71,9 +95,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6F9170C31DF9594800AC4807 /* Build configuration list for PBXNativeTarget "FirebaseSwift3" */;
 			buildPhases = (
+				D1F3C86EB247D659B344F5C4 /* [CP] Check Pods Manifest.lock */,
 				6F9170AD1DF9594800AC4807 /* Sources */,
 				6F9170AE1DF9594800AC4807 /* Frameworks */,
 				6F9170AF1DF9594800AC4807 /* Resources */,
+				C819C670CB6DDC4FEAE02310 /* [CP] Embed Pods Frameworks */,
+				1A6DA57C207700BFE1CAC7A5 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -131,6 +158,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		1A6DA57C207700BFE1CAC7A5 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FirebaseSwift3/Pods-FirebaseSwift3-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C819C670CB6DDC4FEAE02310 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FirebaseSwift3/Pods-FirebaseSwift3-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D1F3C86EB247D659B344F5C4 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		6F9170AD1DF9594800AC4807 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -181,6 +256,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -203,7 +279,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -231,6 +307,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -247,7 +324,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -258,6 +335,7 @@
 		};
 		6F9170C41DF9594800AC4807 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8D1131A7F92E36FE93BA5705 /* Pods-FirebaseSwift3.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = FirebaseSwift3/Info.plist;
@@ -270,6 +348,7 @@
 		};
 		6F9170C51DF9594800AC4807 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C983F1345590DDF059A30F6B /* Pods-FirebaseSwift3.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = FirebaseSwift3/Info.plist;
@@ -299,6 +378,7 @@
 				6F9170C51DF9594800AC4807 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
