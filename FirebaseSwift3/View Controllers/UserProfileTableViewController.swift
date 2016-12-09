@@ -70,30 +70,14 @@ class UserProfileTableViewController: UITableViewController {
                             self.userImageView.image = UIImage(data: data)
                         }
                     }
-                    
-                    
-                    
-                    
-                    
                 }else {
                     print(error!.localizedDescription)
 
                 }
-                
-                
             })
-            
-            
-            
-            
             }) { (error) in
                 print(error.localizedDescription)
         }
-    
-    
-    
-    
-    
     }
     
     @IBAction func unwindToProfile(storyboard: UIStoryboardSegue){}

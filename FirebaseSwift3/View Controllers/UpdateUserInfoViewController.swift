@@ -124,10 +124,65 @@ class UpdateUserInfoViewController: UIViewController {
 
     
     @IBAction func updateInfoAction(sender: UIButton) {
+        updateUserInfo(user: FIRAuth.auth()!.currentUser!, username: usernameTextField.text!, country: countryTextField.text!, biography: biographyTextField.text!, pictureData: UIImagePNGRepresentation(userImageView.image!))
+    }
+
+    private func updateUserInfo(user: FIRUser!, username: String, country: String, biography: String, pictureData: Data!){
+        
+        let imagePath = "profileImage\(user.uid)/userPic.jpg"
+        
+        let imageRef = storageRef.reference().child(imagePath)
+        
+        let metaData = FIRStorageMetadata()
+        metaData.contentType = "image/jpeg"
+        
+        imageRef.put(pictureData, metadata: metaData) { (newMetaData, error) in
+            
+            if error == nil {
+                
+                let changeRequest = user.profileChangeRequest()
+                changeRequest.displayName = username
+                
+                if let photoURL = newMetaData!.downloadURL() {
+                    changeRequest.photoURL = photoURL
+                }
+                
+                changeRequest.commitChanges(completion: { (error) in
+                    if error == nil {
+                        
+                        self.updateUserInfo(user:user, username: username, country: country, biography: biography)
+                        
+                        
+                    }else{
+                        print(error!.localizedDescription)
+                        
+                    }
+                })
+            }
+            else {
+                print(error!.localizedDescription)
+            }
+        }
+    }
+    
+    private func updateUserInfo(user: FIRUser!, username: String, country: String, biography: String){
+        
+        let userInfo = ["username": username, "country": country, "biography":biography, "uid": user.uid, "photoURL": String(describing: user.photoURL!)]
+        
+        let userRef = dataBaseRef.child("users").child(user.uid)
+    
+        userRef.updateChildValues(userInfo) { (error, ref) in
+            if error == nil {
+                print("user info updated successfully")
+            }else {
+                print(error!.localizedDescription)
+                
+            }
+        }
     }
 
         
-    }
+}
     
 extension UpdateUserInfoViewController: UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource,UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -276,7 +331,7 @@ extension UpdateUserInfoViewController: UITextFieldDelegate, UIPickerViewDelegat
         }
         
         let data = countryArrays[row]
-        let title = NSAttributedString(string: data, attributes: [NSFontAttributeName: UIFont(name: "SFMono-Medium", size: 18.0)!,NSForegroundColorAttributeName: UIColor.white])
+        let title = NSAttributedString(string: data, attributes: [NSFontAttributeName: UIFont(name: "AvenirNext-Medium", size: 18.0)!,NSForegroundColorAttributeName: UIColor.white])
         label?.attributedText = title
         label?.textAlignment = .center
         return label!
