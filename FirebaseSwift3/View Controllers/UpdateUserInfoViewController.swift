@@ -7,9 +7,21 @@
 //
 
 import UIKit
+import FirebaseAuth
+import FirebaseStorage
+import FirebaseDatabase
 
 
 class UpdateUserInfoViewController: UIViewController {
+    
+    var dataBaseRef: FIRDatabaseReference! {
+        return FIRDatabase.database().reference()
+    }
+    
+    var storageRef: FIRStorage {
+        
+        return FIRStorage.storage()
+    }
     
     @IBOutlet weak var userImageView: UIImageView!{
         didSet {
@@ -62,11 +74,51 @@ class UpdateUserInfoViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        loadUserInfo()
     }
     
     func loadUserInfo(){
-        
+        let userRef = dataBaseRef.child("users/\(FIRAuth.auth()!.currentUser!.uid)")
+        userRef.observe(.value, with: { (snapshot) in
+            
+            let user = User(snapshot: snapshot)
+            self.usernameTextField.text = user.username
+            self.countryTextField.text = user.country!
+            self.biographyTextField.text = user.biography!
+            let imageURL = user.photoURL!
+            
+            self.storageRef.reference(forURL: imageURL).data(withMaxSize: 1 * 1024 * 1024, completion: { (imgData, error) in
+                
+                if error == nil {
+                    DispatchQueue.main.async {
+                        if let data = imgData {
+                            self.userImageView.image = UIImage(data: data)
+                        }
+                    }
+                    
+                    
+                    
+                    
+                    
+                }else {
+                    print(error!.localizedDescription)
+                    
+                }
+                
+                
+            })
+            
+            
+            
+            
+        }) { (error) in
+            print(error.localizedDescription)
         }
+        
+        
+        
+        
+    }
 
 
 

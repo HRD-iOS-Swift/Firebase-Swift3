@@ -58,9 +58,11 @@ class LoginViewController: UIViewController {
     @IBAction func loginAction(sender: UIButton) {
         self.view.endEditing(true)
 
-        let email = emailTextField.text!.lowercased()
+        let email = "yinkokpheng@gmail.com"
+        let password = "123456"
+//        let email = emailTextField.text!.lowercased()
         let finalEmail = email.trimmingCharacters(in: .whitespacesAndNewlines)
-        let password = passwordTextField.text!
+//        let password = passwordTextField.text!
 
         if finalEmail.characters.count < 8 || finalEmail.isEmpty || password.isEmpty {
             

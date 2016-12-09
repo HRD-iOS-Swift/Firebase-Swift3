@@ -518,10 +518,10 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="imageCell" rowHeight="560" id="DqR-OZ-zwe">
-                                <rect key="frame" x="0.0" y="56" width="375" height="560"/>
+                                <rect key="frame" x="0.0" y="55.5" width="375" height="560"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DqR-OZ-zwe" id="Sjw-T6-avF">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="559"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="559.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user-placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="Qis-Ci-U4T">
@@ -610,10 +610,10 @@
                                 </tableViewCellContentView>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="textCell" rowHeight="560" id="W7k-6R-8z5">
-                                <rect key="frame" x="0.0" y="616" width="375" height="560"/>
+                                <rect key="frame" x="0.0" y="615.5" width="375" height="560"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="W7k-6R-8z5" id="0Nc-Pa-aN1">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="559"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="559.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user-placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="Aos-yM-0CV">
@@ -738,10 +738,10 @@
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="comment" rowHeight="118" id="5D9-qQ-7eR">
-                                        <rect key="frame" x="0.0" y="56" width="375" height="118"/>
+                                        <rect key="frame" x="0.0" y="55.5" width="375" height="118"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5D9-qQ-7eR" id="eCu-UR-rdp">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="117"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="117.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user-placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="LpK-cs-56N">
@@ -1024,7 +1024,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="updateInfoAction:" destination="KG6-FK-wJI" eventType="touchUpInside" id="v4g-26-g31"/>
+                                    <action selector="updateInfoActionWithSender:" destination="KG6-FK-wJI" eventType="touchUpInside" id="dpz-PF-4Xc"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -1099,7 +1099,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="S4Z-13-8ec" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="favorites" id="QXV-HM-E5e"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Gqx-PA-0PR">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Gqx-PA-0PR">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textAttributes key="titleTextAttributes">
@@ -1126,10 +1126,10 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="usersCell" rowHeight="123" id="dLA-AX-uH3" customClass="UsersTableViewCell" customModule="FirebaseSwift3" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="56" width="375" height="123"/>
+                                <rect key="frame" x="0.0" y="55.5" width="375" height="123"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dLA-AX-uH3" id="6Fl-0b-UIb">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="122"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="122.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="z8c-qD-0FM">
@@ -1208,7 +1208,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dFL-ar-yus" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="downloads" id="MET-Gk-N45"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="5sE-a3-hGp">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="5sE-a3-hGp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
