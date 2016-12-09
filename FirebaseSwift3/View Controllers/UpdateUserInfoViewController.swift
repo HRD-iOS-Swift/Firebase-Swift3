@@ -69,13 +69,11 @@ class UpdateUserInfoViewController: UIViewController {
         setUpPickerView()
         setGestureRecognizersToDismissKeyboard()
         retrievingCountries()
+        loadUserInfo()
         
         }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        loadUserInfo()
-    }
+  
     
     func loadUserInfo(){
         let userRef = dataBaseRef.child("users/\(FIRAuth.auth()!.currentUser!.uid)")
@@ -224,6 +222,7 @@ extension UpdateUserInfoViewController: UITextFieldDelegate, UIPickerViewDelegat
     }
 
     func choosePictureAction(sender: AnyObject) {
+        print("hhhhhh")
         let pickerController = UIImagePickerController()
         pickerController.delegate = self
         pickerController.allowsEditing = true
@@ -258,6 +257,21 @@ extension UpdateUserInfoViewController: UITextFieldDelegate, UIPickerViewDelegat
         self.present(pickerController, animated: true, completion: nil)
         
     }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage{
+            self.userImageView.contentMode = .scaleAspectFit
+            self.userImageView.image = pickedImage
+        }
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
     
     
     @IBAction func unwindToLogin(storyboard: UIStoryboardSegue){}

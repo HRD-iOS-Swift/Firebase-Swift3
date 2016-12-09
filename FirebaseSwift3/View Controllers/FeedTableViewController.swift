@@ -7,47 +7,71 @@
 //
 
 import UIKit
+import FirebaseDatabase
+import FirebaseStorage
 import FirebaseAuth
 
 class FeedTableViewController: UITableViewController {
 
+    
+    var postArray = [Post]()
+    
+    var dataBaseRef: FIRDatabaseReference! {
+        return FIRDatabase.database().reference()
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-                
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+       fetchPosts()
     }
+    
+    func fetchPosts(){
+        print("\(dataBaseRef.child("posts"))")
+        dataBaseRef.child("posts").observe(.value, with: { (snapshot) in
+            var results = [Post]()
+            
+            for post in snapshot.children {
+            
+                let post = Post(snapshot: post as! FIRDataSnapshot)
+                    results.append(post)
+            }
+            self.postArray = results
+            self.tableView.reloadData()
+            
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+    }
+
 
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        return postArray.count
     }
 
-    /*
+
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
+        if postArray[indexPath.row].postPicUrl != "" {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "imageCell", for: indexPath) as! FeedOneTableViewCell
+            
+            cell.configureCell(post: postArray[indexPath.row])
+             return cell
+        }else{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "textCell", for: indexPath) as! FeedTwoTableViewCell
+            cell.configureCell(post: postArray[indexPath.row])
+             return cell
+        }
+        
+       
     }
-    */
+    
 
     /*
     // Override to support conditional editing of the table view.
