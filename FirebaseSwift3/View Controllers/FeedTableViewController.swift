@@ -45,8 +45,12 @@ class FeedTableViewController: UITableViewController {
             print(error.localizedDescription)
         }
     }
-    
-    
+}
+
+
+//-------------------------------------------------------------------------------------------------------
+// MARK: - TableView Delegate and DataSource
+extension FeedTableViewController{
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return postArray.count

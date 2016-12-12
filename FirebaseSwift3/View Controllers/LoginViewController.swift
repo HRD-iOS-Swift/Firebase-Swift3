@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class LoginViewController: UIViewController {
     
@@ -46,17 +47,26 @@ class LoginViewController: UIViewController {
         setGestureRecognizersToDismissKeyboard()
     }
     
-    
+    // ##3 - Reset Password
     @IBAction func resetPasswordAction(sender: UIButton) {
         self.view.endEditing(true)
         resetPassword()
     }
     
+    // ##1 - AuthService Object
     var authService = AuthService()
     
+    // ##2 - Login
     @IBAction func loginAction(sender: UIButton) {
         self.view.endEditing(true)
-        
+        login()
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------
+// MARK: - Login
+extension LoginViewController{
+    func login() {
         let email = "yinkokpheng@gmail.com"
         let password = "123456"
         //        let email = emailTextField.text!.lowercased()
@@ -75,8 +85,8 @@ class LoginViewController: UIViewController {
     }
 }
 
-//----------------------------------------------------------------------------------------------------------------------//
-
+//-------------------------------------------------------------------------------------------------------
+// MARK:- TextField Delegate
 extension LoginViewController: UITextFieldDelegate  {
     
     @IBAction func unwindToLogin(storyboard: UIStoryboardSegue){}
@@ -126,6 +136,5 @@ extension LoginViewController: UITextFieldDelegate  {
         swipDown.direction = .down
         view.addGestureRecognizer(swipDown)
     }
-    
-    
 }
+

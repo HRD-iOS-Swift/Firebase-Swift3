@@ -67,10 +67,8 @@ class SignUpViewController: UIViewController {
         }
     }
     
-    
     var pickerView: UIPickerView!
     var countryArrays = [String]()
-    var authService = AuthService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,15 +79,25 @@ class SignUpViewController: UIViewController {
         
     }
     
-    
     func showMessage() {
         let alertController = UIAlertController(title: "OOPS", message: "A user with the same username already exists. Please choose another one", preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
         self.present(alertController, animated: true, completion: nil)
     }
     
+    // ##1 - AuthService Object
+    var authService = AuthService()
+    
+    // ##2 - Sign Up
     @IBAction func signUpAction(sender: UIButton) {
-        
+        signUp()
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------
+// MARK: - Sing Up
+extension SignUpViewController{
+    func signUp() {
         let email = emailTextField.text!.lowercased()
         let finalEmail = email.trimmingCharacters(in: .whitespacesAndNewlines)
         let country = countryTextField.text!
@@ -108,17 +116,13 @@ class SignUpViewController: UIViewController {
         }else {
             self.view.endEditing(true)
             authService.signUp(firstLastName: firstLastName,username: username, email: finalEmail, country: country, biography: biography, password: password, pictureData: pictureData)
-            
         }
-        
     }
-    
 }
 
 
-
-//--------------------------------------------------------------------------------------------------------------------
-
+//-------------------------------------------------------------------------------------------------------
+// MARK: - TextField & PickerView Delegate
 extension SignUpViewController: UITextFieldDelegate,UIPickerViewDelegate, UIPickerViewDataSource,UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func setUpPickerView(){
@@ -286,3 +290,4 @@ extension SignUpViewController: UITextFieldDelegate,UIPickerViewDelegate, UIPick
         
     }
 }
+

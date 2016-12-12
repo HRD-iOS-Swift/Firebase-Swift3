@@ -16,6 +16,8 @@ class AddPostViewController: UIViewController,UIImagePickerControllerDelegate, U
     @IBOutlet weak var postImageView: UIImageView!
     @IBOutlet weak var hasMedia: UISwitch!
     @IBOutlet weak var textView: UITextView!
+    
+    // ##1 - Property
     var currentUser: User!
     
     var dataBaseRef: FIRDatabaseReference! {
@@ -25,6 +27,8 @@ class AddPostViewController: UIViewController,UIImagePickerControllerDelegate, U
     var storageRef: FIRStorageReference! {
         return FIRStorage.storage().reference()
     }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let rightBarButton = UIBarButtonItem(image: UIImage(named:"save"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(AddPostViewController.savePost))
@@ -43,6 +47,20 @@ class AddPostViewController: UIViewController,UIImagePickerControllerDelegate, U
         loadUserInfo()
     }
     
+    
+    @IBAction func switchAction(_ sender: AnyObject) {
+        if hasMedia.isOn {
+            self.postImageView.isHidden = false
+        }else {
+            self.postImageView.isHidden = true
+            
+        }
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------
+// MARK: - Load User Info and Save Post
+extension AddPostViewController{
     func loadUserInfo(){
         
         let userRef = dataBaseRef.child("users/\(FIRAuth.auth()!.currentUser!.uid)")
@@ -54,6 +72,61 @@ class AddPostViewController: UIViewController,UIImagePickerControllerDelegate, U
         }
         
     }
+    
+    
+    func savePost(){
+        
+        var text: String!
+        
+        if let postText = textView.text {
+            text = postText
+        }
+        
+        if hasMedia.isOn {
+            let data = UIImageJPEGRepresentation(self.postImageView.image!, 0.7)!
+            let imagePath = "profileImage\(NSUUID().uuidString)/postPic.jpg"
+            
+            let imageRef = storageRef.child(imagePath)
+            
+            let metaData = FIRStorageMetadata()
+            metaData.contentType = "image/jpeg"
+            
+            imageRef.put(data, metadata: metaData, completion: { (newMetaData, error) in
+                if error == nil {
+                    let newPost = Post(firstLastName: self.currentUser.firstLastName!, username: self.currentUser.username, postId: NSUUID().uuidString, postText: text, postDate: (NSDate().timeIntervalSince1970 as NSNumber), postPicUrl: String(describing: newMetaData!.downloadURL()!), postType: "IMAGE", uid: self.currentUser.uid)
+                    let postRef = self.dataBaseRef.child("posts").childByAutoId()
+                    postRef.setValue(newPost.toAnyObject(), withCompletionBlock: { (error, ref) in
+                        if error == nil {
+                            self.navigationController!.popToRootViewController(animated: true)
+                        }else {
+                            print(error!.localizedDescription)
+                            
+                        }
+                    })
+                }else {
+                    print(error!.localizedDescription)
+                }
+            })
+        }else {
+            
+            let newPost = Post(firstLastName: self.currentUser.firstLastName!, username: self.currentUser.username, postId: NSUUID().uuidString, postText: text, postDate: (NSDate().timeIntervalSince1970 as NSNumber), postPicUrl: "", postType: "TEXT", uid: self.currentUser.uid)
+            let postRef = self.dataBaseRef.child("posts").childByAutoId()
+            postRef.setValue(newPost.toAnyObject(), withCompletionBlock: { (error, ref) in
+                if error == nil {
+                    self.navigationController!.popToRootViewController(animated: true)
+                }else {
+                    print(error!.localizedDescription)
+                    
+                }
+            })
+        }
+    }
+
+}
+
+//-------------------------------------------------------------------------------------------------------
+// MARK: - ImagePickerController Delegate
+extension AddPostViewController{
     func choosePicture(){
         let pickerController = UIImagePickerController()
         pickerController.delegate = self
@@ -101,67 +174,6 @@ class AddPostViewController: UIViewController,UIImagePickerControllerDelegate, U
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         self.dismiss(animated: true, completion: nil)
-    }
-    
-    func savePost(){
-        
-        var text: String!
-        
-        if let postText = textView.text {
-            text = postText
-        }
-        
-        if hasMedia.isOn {
-            let data = UIImageJPEGRepresentation(self.postImageView.image!, 0.7)!
-            let imagePath = "profileImage\(NSUUID().uuidString)/postPic.jpg"
-            
-            let imageRef = storageRef.child(imagePath)
-            
-            let metaData = FIRStorageMetadata()
-            metaData.contentType = "image/jpeg"
-            
-            imageRef.put(data, metadata: metaData, completion: { (newMetaData, error) in
-                if error == nil {
-                    let newPost = Post(firstLastName: self.currentUser.firstLastName!, username: self.currentUser.username, postId: NSUUID().uuidString, postText: text, postDate: (NSDate().timeIntervalSince1970 as NSNumber), postPicUrl: String(describing: newMetaData!.downloadURL()!), postType: "IMAGE", uid: self.currentUser.uid)
-                    let postRef = self.dataBaseRef.child("posts").childByAutoId()
-                    postRef.setValue(newPost.toAnyObject(), withCompletionBlock: { (error, ref) in
-                        if error == nil {
-                            self.navigationController!.popToRootViewController(animated: true)
-                        }else {
-                            print(error!.localizedDescription)
-                            
-                        }
-                    })
-                }else {
-                    print(error!.localizedDescription)
-                }
-            })
-            
-            
-            
-            
-        }else {
-            
-            let newPost = Post(firstLastName: self.currentUser.firstLastName!, username: self.currentUser.username, postId: NSUUID().uuidString, postText: text, postDate: (NSDate().timeIntervalSince1970 as NSNumber), postPicUrl: "", postType: "TEXT", uid: self.currentUser.uid)
-            let postRef = self.dataBaseRef.child("posts").childByAutoId()
-            postRef.setValue(newPost.toAnyObject(), withCompletionBlock: { (error, ref) in
-                if error == nil {
-                    self.navigationController!.popToRootViewController(animated: true)
-                }else {
-                    print(error!.localizedDescription)
-                    
-                }
-            })
-        }
-    }
-    
-    @IBAction func switchAction(_ sender: AnyObject) {
-        if hasMedia.isOn {
-            self.postImageView.isHidden = false
-        }else {
-            self.postImageView.isHidden = true
-            
-        }
     }
 }
 

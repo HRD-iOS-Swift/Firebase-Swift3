@@ -14,15 +14,6 @@ import FirebaseDatabase
 
 class UpdateUserInfoViewController: UIViewController {
     
-    var dataBaseRef: FIRDatabaseReference! {
-        return FIRDatabase.database().reference()
-    }
-    
-    var storageRef: FIRStorage {
-        
-        return FIRStorage.storage()
-    }
-    
     @IBOutlet weak var userImageView: UIImageView!{
         didSet {
             userImageView.layer.cornerRadius = 5
@@ -63,15 +54,38 @@ class UpdateUserInfoViewController: UIViewController {
     var pickerView: UIPickerView!
     var countryArrays = [String]()
     
+    // ##1 - Create property
+    var dataBaseRef: FIRDatabaseReference! {
+        return FIRDatabase.database().reference()
+    }
+    
+    var storageRef: FIRStorage {
+        
+        return FIRStorage.storage()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setUpPickerView()
         setGestureRecognizersToDismissKeyboard()
         retrievingCountries()
+        
+        // ##2 - load user
         loadUserInfo()
     }
     
+    // ##3 - update user
+    @IBAction func updateInfoAction(sender: UIButton) {
+        updateUserInfo(user: FIRAuth.auth()!.currentUser!, username: usernameTextField.text!, country: countryTextField.text!, biography: biographyTextField.text!, pictureData: UIImagePNGRepresentation(userImageView.image!))
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------
+// MARK:- Load User and Update User
+extension UpdateUserInfoViewController{
+    
+    // ##2 - load user
     func loadUserInfo(){
         let userRef = dataBaseRef.child("users/\(FIRAuth.auth()!.currentUser!.uid)")
         userRef.observe(.value, with: { (snapshot) in
@@ -100,11 +114,8 @@ class UpdateUserInfoViewController: UIViewController {
         }
     }
     
-    @IBAction func updateInfoAction(sender: UIButton) {
-        updateUserInfo(user: FIRAuth.auth()!.currentUser!, username: usernameTextField.text!, country: countryTextField.text!, biography: biographyTextField.text!, pictureData: UIImagePNGRepresentation(userImageView.image!))
-    }
-    
-    private func updateUserInfo(user: FIRUser!, username: String, country: String, biography: String, pictureData: Data!){
+    // ##3 - update user
+    func updateUserInfo(user: FIRUser!, username: String, country: String, biography: String, pictureData: Data!){
         
         let imagePath = "profileImage\(user.uid)/userPic.jpg"
         
@@ -156,6 +167,8 @@ class UpdateUserInfoViewController: UIViewController {
     }
 }
 
+//-------------------------------------------------------------------------------------------------------
+// MARK:- TextField Delegate, PickerView Delegate, ImagePickerController Delegate
 extension UpdateUserInfoViewController: UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource,UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func setUpPickerView(){
@@ -227,7 +240,6 @@ extension UpdateUserInfoViewController: UITextFieldDelegate, UIPickerViewDelegat
         alertController.addAction(savedPhotosAction)
         alertController.addAction(cancelAction)
         
-        
         self.present(pickerController, animated: true, completion: nil)
         
     }
@@ -245,8 +257,6 @@ extension UpdateUserInfoViewController: UITextFieldDelegate, UIPickerViewDelegat
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }
-    
-    
     
     @IBAction func unwindToLogin(storyboard: UIStoryboardSegue){}
     

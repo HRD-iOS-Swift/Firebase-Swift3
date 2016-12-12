@@ -27,6 +27,7 @@ class UserProfileTableViewController: UITableViewController {
     var headerView: UIView!
     var newHeaderLayer: CAShapeLayer!
     
+    // ##1 - Create property
     var dataBaseRef: FIRDatabaseReference! {
         return FIRDatabase.database().reference()
     }
@@ -44,10 +45,31 @@ class UserProfileTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        
+        // ##2 - Load User
         loadUserInfo()
     }
     
     
+    @IBAction func unwindToProfile(storyboard: UIStoryboardSegue){}
+    
+    // MARK: - Table view data source
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // #warning Incomplete implementation, return the number of rows
+        return 0
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        return cell
+    }
+}
+
+//-------------------------------------------------------------------------------------------------------
+// MARK: - Load User and Log out
+extension UserProfileTableViewController{
+    // ##2 - Load User
     func loadUserInfo(){
         
         let userRef = dataBaseRef.child("users/\(FIRAuth.auth()!.currentUser!.uid)")
@@ -78,9 +100,7 @@ class UserProfileTableViewController: UITableViewController {
         }
     }
     
-    @IBAction func unwindToProfile(storyboard: UIStoryboardSegue){}
-    
-    
+    // ##3 - Log Out
     @IBAction func logOutAction(sender: AnyObject) {
         
         if FIRAuth.auth()!.currentUser != nil {
@@ -96,19 +116,7 @@ class UserProfileTableViewController: UITableViewController {
             }
         }
     }
-    
-    
-    // MARK: - Table view data source
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
-    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        return cell
-    }
+
 }
 
 extension UserProfileTableViewController {

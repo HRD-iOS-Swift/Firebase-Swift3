@@ -56,9 +56,4 @@ struct Post {
     func toAnyObject() -> [String: Any] {
         return ["username": username, "firstLastName":firstLastName,"postId":postId,"postType":postType, "postPicUrl":postPicUrl,"postDate":postDate, "postText":postText,"uid": uid]
     }
-    
-    
-    
-    
-    
 }

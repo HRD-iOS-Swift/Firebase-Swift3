@@ -38,12 +38,25 @@ class FeedTwoTableViewCell: UITableViewCell {
     }
 
     func configureCell(post: Post){
+        let date = Date(timeIntervalSince1970: post.postDate as TimeInterval)
         self.usernameLabel.text = post.username
-        self.postDateLabel.text = "\(post.postDate)"
+        self.postDateLabel.text = "\(date)"
         self.firstLastNameLabel.text = post.firstLastName
         self.postTextTextView.text = post.postText
-    
-        let profileURL = post.postPicUrl!
+        
+        self.storageRef.reference().child("profileImage\(post.uid!)/userPic.jpg").data(withMaxSize: 10194304, completion: { (imgData, error) in
+            
+            if error == nil {
+                DispatchQueue.main.async {
+                    if let data = imgData {
+                        self.profileImageView.image = UIImage(data: data)
+                    }
+                }
+            }else {
+                print(error!.localizedDescription)
+                
+            }
+        })
         
     }
 

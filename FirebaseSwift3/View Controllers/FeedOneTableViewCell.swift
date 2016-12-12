@@ -41,8 +41,10 @@ class FeedOneTableViewCell: UITableViewCell {
     }
 
     func configureCell(post: Post){
+        
+        let date = Date(timeIntervalSince1970: post.postDate as TimeInterval)
         self.usernameLabel.text = post.username
-        self.postDateLabel.text = "\(post.postDate)"
+        self.postDateLabel.text = "\(date)"
         self.firstLastNameLabel.text = post.firstLastName
         self.postTextTextView.text = post.postText
       

@@ -23,7 +23,7 @@ struct AuthService {
     }
     
     
-    // 1 - Creating the Signup function
+    // ##1 - Creating the Signup function
     
     func signUp (firstLastName: String,username: String, email: String, country: String, biography: String, password: String, pictureData: Data!) {
         
@@ -36,11 +36,11 @@ struct AuthService {
             }
         })
         
-    
+        
     }
     
     
-    // 2 - Save the User Profile Picture to Firebase Storage, Assign to the new user a username and Photo URL
+    // ##2 - Save the User Profile Picture to Firebase Storage, Assign to the new user a username and Photo URL
     
     private func setUserInfo(firstLastName: String,user: FIRUser!, username: String, country: String, biography: String, password: String, pictureData: Data!){
         
@@ -70,7 +70,7 @@ struct AuthService {
                         
                     }else{
                         print(error!.localizedDescription)
- 
+                        
                     }
                 })
             }
@@ -80,7 +80,7 @@ struct AuthService {
         }
     }
     
-    // 3 - Save the User Info to Firebase Database
+    // ##3 - Save the User Info to Firebase Database
     private func saveUserInfo(firstLastName: String,user: FIRUser!, username: String, country: String, biography: String, password: String){
         
         let userInfo = ["firstLastName":firstLastName,"email": user.email!, "username": username, "country": country, "biography":biography, "uid": user.uid, "photoURL": String(describing: user.photoURL!)]
@@ -93,13 +93,13 @@ struct AuthService {
                 self.logIn(email: user.email!, password: password)
             }else {
                 print(error!.localizedDescription)
-
+                
             }
         }
     }
     
     
-   // 4 - Logging the user in function
+    // ##4 - Logging the user in function
     func logIn(email: String, password: String){
         FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (user, error) in
             if error == nil {
@@ -113,7 +113,7 @@ struct AuthService {
             }
             else {
                 print(error!.localizedDescription)
-  
+                
             }
         })
     }
@@ -122,6 +122,7 @@ struct AuthService {
 
 extension LoginViewController {
     
+    // ##5 - Reset Password
     func resetPassword (){
         var email = ""
         let alertController = UIAlertController(title: "OOPS", message: "An email containing the steps to follow in order to reset your password has been sent to: \(email) ", preferredStyle: .alert)
@@ -132,9 +133,7 @@ extension LoginViewController {
         let textField = alertController.textFields!.first
         email = textField!.text!
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-
         
-
         FIRAuth.auth()?.sendPasswordReset(withEmail: email, completion: { (error) in
             if error == nil {
                 
