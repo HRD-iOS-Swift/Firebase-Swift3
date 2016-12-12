@@ -20,54 +20,8 @@ class FeedTableViewController: UITableViewController {
         return FIRDatabase.database().reference()
     }
     
-    var remoteConfig : FIRRemoteConfig!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        remoteConfig = FIRRemoteConfig.remoteConfig()
-        let remoteConfigSettings = FIRRemoteConfigSettings(developerModeEnabled: true)
-        remoteConfig.configSettings = remoteConfigSettings!
-        setupRemoteConfig()
-        fetchRemoteConfig()
-        
-        
-    }
-    
-    func setupRemoteConfig() {
-        let defaultValue = [
-            "navTitle":"Hello"
-        ]
-        remoteConfig.setDefaults(defaultValue as [String : NSObject]?)
-        
-    }
-    
-    func fetchRemoteConfig() {
-        // 1
-        // WARNING: Don't actually do this in production!
-        var expirationDuration = 3600
-        if remoteConfig.configSettings.isDeveloperModeEnabled {
-            expirationDuration = 0
-        }
-        
-        remoteConfig.fetch(withExpirationDuration: TimeInterval(expirationDuration)) { (status, error) -> Void in
-            if status == .success {
-                print("Config fetched!")
-                self.remoteConfig.activateFetched()
-            } else {
-                print("Config not fetched")
-                print("Error \(error!.localizedDescription)")
-            }
-            self.updateView()
-        }
-    }
-    
-    func updateView() {
-        let rc = remoteConfig!
-        //rc.configValue(forKey: "navTitle")
-        //rc.configValue(forKey: "navTitle").stringValue
-        //rc["navTitle"]
-        self.title = rc["navTitle"].stringValue
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -44,7 +44,7 @@ struct AuthService {
     
     private func setUserInfo(firstLastName: String,user: FIRUser!, username: String, country: String, biography: String, password: String, pictureData: Data!){
         
-        let imagePath = "profileImage\(user.uid)/userPic.jpg"
+        let imagePath = "profileImage/\(user.uid)/userPic.jpg"
         
         let imageRef = storageRef.child(imagePath)
         

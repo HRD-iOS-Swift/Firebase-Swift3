@@ -44,7 +44,7 @@ class FeedTwoTableViewCell: UITableViewCell {
         self.firstLastNameLabel.text = post.firstLastName
         self.postTextTextView.text = post.postText
         
-        self.storageRef.reference().child("profileImage\(post.uid!)/userPic.jpg").data(withMaxSize: 10194304, completion: { (imgData, error) in
+        self.storageRef.reference().child("profileImage/\(post.uid!)/userPic.jpg").data(withMaxSize: 10194304, completion: { (imgData, error) in
             
             if error == nil {
                 DispatchQueue.main.async {

@@ -64,7 +64,7 @@ class FeedOneTableViewCell: UITableViewCell {
             }
         })
         
-        self.storageRef.reference().child("profileImage\(post.uid!)/userPic.jpg").data(withMaxSize: 10194304, completion: { (imgData, error) in
+        self.storageRef.reference().child("profileImage/\(post.uid!)/userPic.jpg").data(withMaxSize:  1 * 1024 * 1024, completion: { (imgData, error) in
             
             if error == nil {
                 DispatchQueue.main.async {

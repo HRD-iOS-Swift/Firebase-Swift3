@@ -84,7 +84,7 @@ extension AddPostViewController{
         
         if hasMedia.isOn {
             let data = UIImageJPEGRepresentation(self.postImageView.image!, 0.7)!
-            let imagePath = "profileImage\(NSUUID().uuidString)/postPic.jpg"
+            let imagePath = "postImage/\(NSUUID().uuidString)/postPic.jpg"
             
             let imageRef = storageRef.child(imagePath)
             
