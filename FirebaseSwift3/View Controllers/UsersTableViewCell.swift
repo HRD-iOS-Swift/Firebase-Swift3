@@ -14,7 +14,7 @@ import FirebaseAuth
 
 
 class UsersTableViewCell: UITableViewCell {
-
+    
     @IBOutlet weak var usernameLabel: UILabel!
     
     @IBOutlet weak var emailLabel: UILabel!
@@ -32,14 +32,14 @@ class UsersTableViewCell: UITableViewCell {
         return FIRStorage.storage()
     }
     
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         userImageView.layer.cornerRadius = 54
-
+        
     }
-
+    
     func configureCell(user: User){
         
         self.emailLabel.text = user.firstLastName
@@ -56,13 +56,10 @@ class UsersTableViewCell: UITableViewCell {
                         self.userImageView.image = UIImage(data: data)
                     }
                 }
-     
             }else {
                 print(error!.localizedDescription)
                 
             }
-            
-            
         })
     }
     

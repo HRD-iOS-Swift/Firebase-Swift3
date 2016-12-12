@@ -12,7 +12,7 @@ import FirebaseStorage
 import FirebaseDatabase
 
 class AddPostViewController: UIViewController,UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-
+    
     @IBOutlet weak var postImageView: UIImageView!
     @IBOutlet weak var hasMedia: UISwitch!
     @IBOutlet weak var textView: UITextView!
@@ -42,16 +42,17 @@ class AddPostViewController: UIViewController,UIImagePickerControllerDelegate, U
         super.viewWillAppear(true)
         loadUserInfo()
     }
+    
     func loadUserInfo(){
         
         let userRef = dataBaseRef.child("users/\(FIRAuth.auth()!.currentUser!.uid)")
         userRef.observe(.value, with: { (snapshot) in
             
             self.currentUser = User(snapshot: snapshot)
-                    }) { (error) in
+        }) { (error) in
             print(error.localizedDescription)
         }
-  
+        
     }
     func choosePicture(){
         let pickerController = UIImagePickerController()
@@ -103,7 +104,7 @@ class AddPostViewController: UIViewController,UIImagePickerControllerDelegate, U
     }
     
     func savePost(){
-    
+        
         var text: String!
         
         if let postText = textView.text {
@@ -128,7 +129,7 @@ class AddPostViewController: UIViewController,UIImagePickerControllerDelegate, U
                             self.navigationController!.popToRootViewController(animated: true)
                         }else {
                             print(error!.localizedDescription)
-
+                            
                         }
                     })
                 }else {
@@ -151,13 +152,7 @@ class AddPostViewController: UIViewController,UIImagePickerControllerDelegate, U
                     
                 }
             })
- 
-            
-            
-            
         }
-        
-        
     }
     
     @IBAction func switchAction(_ sender: AnyObject) {
@@ -165,7 +160,7 @@ class AddPostViewController: UIViewController,UIImagePickerControllerDelegate, U
             self.postImageView.isHidden = false
         }else {
             self.postImageView.isHidden = true
-
+            
         }
     }
 }

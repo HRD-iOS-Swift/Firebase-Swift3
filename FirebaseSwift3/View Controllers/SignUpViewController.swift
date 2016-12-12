@@ -22,7 +22,7 @@ class SignUpViewController: UIViewController {
             firstLastNameTextField.delegate = self
         }
     }
-
+    
     
     @IBOutlet weak var usernameTextField: UITextField!{
         didSet{
@@ -30,35 +30,35 @@ class SignUpViewController: UIViewController {
             usernameTextField.delegate = self
         }
     }
-
+    
     @IBOutlet weak var emailTextField: UITextField!{
         didSet{
             emailTextField.layer.cornerRadius = 5
             emailTextField.delegate = self
         }
     }
-
+    
     @IBOutlet weak var biographyTextField: UITextField!{
         didSet{
             biographyTextField.layer.cornerRadius = 5
             biographyTextField.delegate = self
         }
     }
-
+    
     @IBOutlet weak var countryTextField: UITextField!{
         didSet{
             countryTextField.layer.cornerRadius = 5
             countryTextField.delegate = self
         }
     }
-
+    
     @IBOutlet weak var passwordTextField: UITextField!{
         didSet{
             passwordTextField.layer.cornerRadius = 5
             passwordTextField.delegate = self
         }
     }
-
+    
     @IBOutlet weak var signUpButton: UIButton!{
         didSet{
             signUpButton.layer.cornerRadius = 5
@@ -66,12 +66,11 @@ class SignUpViewController: UIViewController {
             signUpButton.layer.borderColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.1).cgColor
         }
     }
-
+    
     
     var pickerView: UIPickerView!
     var countryArrays = [String]()
     var authService = AuthService()
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,18 +79,15 @@ class SignUpViewController: UIViewController {
         setGestureRecognizersToDismissKeyboard()
         retrievingCountries()
         
-        
-            }
+    }
     
     
     func showMessage() {
-        
         let alertController = UIAlertController(title: "OOPS", message: "A user with the same username already exists. Please choose another one", preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
         self.present(alertController, animated: true, completion: nil)
-        
-        
     }
+    
     @IBAction func signUpAction(sender: UIButton) {
         
         let email = emailTextField.text!.lowercased()
@@ -114,10 +110,10 @@ class SignUpViewController: UIViewController {
             authService.signUp(firstLastName: firstLastName,username: username, email: finalEmail, country: country, biography: biography, password: password, pictureData: pictureData)
             
         }
- 
+        
     }
     
-   }
+}
 
 
 
@@ -130,9 +126,9 @@ extension SignUpViewController: UITextFieldDelegate,UIPickerViewDelegate, UIPick
         pickerView.delegate = self
         pickerView.dataSource = self
         pickerView.backgroundColor = UIColor(white: 0.3, alpha: 1.0)
-
+        
         countryTextField.inputView = pickerView
-        }
+    }
     
     func setGestureRecognizersToDismissKeyboard(){
         let imageTapGesture = UITapGestureRecognizer(target: self, action: #selector(SignUpViewController.choosePictureAction(sender:)))
@@ -289,6 +285,4 @@ extension SignUpViewController: UITextFieldDelegate,UIPickerViewDelegate, UIPick
         return label!
         
     }
-
-    
 }

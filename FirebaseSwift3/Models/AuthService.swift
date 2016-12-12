@@ -101,7 +101,6 @@ struct AuthService {
     
    // 4 - Logging the user in function
     func logIn(email: String, password: String){
-        
         FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (user, error) in
             if error == nil {
                 if let user = user {
@@ -111,28 +110,13 @@ struct AuthService {
                     let appDel : AppDelegate = UIApplication.shared.delegate as! AppDelegate
                     appDel.logUser()
                 }
-                
-                
             }
             else {
                 print(error!.localizedDescription)
   
             }
         })
-        
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-  
-    
 }
 
 
@@ -161,8 +145,5 @@ extension LoginViewController {
                 
             }
         })
-        
     }
-    
-    
 }

@@ -9,7 +9,7 @@
 import UIKit
 
 class LoginViewController: UIViewController {
-
+    
     @IBOutlet weak var signUpButton: UIButton!{
         didSet {
             signUpButton.layer.cornerRadius = 5
@@ -50,20 +50,19 @@ class LoginViewController: UIViewController {
     @IBAction func resetPasswordAction(sender: UIButton) {
         self.view.endEditing(true)
         resetPassword()
-        
-        }
-
+    }
+    
     var authService = AuthService()
     
     @IBAction func loginAction(sender: UIButton) {
         self.view.endEditing(true)
-
+        
         let email = "yinkokpheng@gmail.com"
         let password = "123456"
-//        let email = emailTextField.text!.lowercased()
+        //        let email = emailTextField.text!.lowercased()
         let finalEmail = email.trimmingCharacters(in: .whitespacesAndNewlines)
-//        let password = passwordTextField.text!
-
+        //        let password = passwordTextField.text!
+        
         if finalEmail.characters.count < 8 || finalEmail.isEmpty || password.isEmpty {
             
             let alertController = UIAlertController(title: "OOPS", message: "hEY MAN, You gotta fill all the fields", preferredStyle: .alert)
@@ -71,12 +70,9 @@ class LoginViewController: UIViewController {
             present(alertController, animated: true, completion: nil)
             
         }else {
-            
             authService.logIn(email: finalEmail, password: password)
         }
-        }
-    
-    
+    }
 }
 
 //----------------------------------------------------------------------------------------------------------------------//

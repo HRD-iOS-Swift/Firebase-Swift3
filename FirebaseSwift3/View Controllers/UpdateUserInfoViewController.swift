@@ -36,7 +36,7 @@ class UpdateUserInfoViewController: UIViewController {
             usernameTextField.delegate = self
         }
     }
-
+    
     @IBOutlet weak var biographyTextField: UITextField!{
         didSet{
             biographyTextField.layer.cornerRadius = 5
@@ -50,7 +50,7 @@ class UpdateUserInfoViewController: UIViewController {
             countryTextField.delegate = self
         }
     }
-
+    
     
     @IBOutlet weak var updateButton: UIButton! {
         didSet{
@@ -65,15 +65,12 @@ class UpdateUserInfoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-     
+        
         setUpPickerView()
         setGestureRecognizersToDismissKeyboard()
         retrievingCountries()
         loadUserInfo()
-        
-        }
-    
-  
+    }
     
     func loadUserInfo(){
         let userRef = dataBaseRef.child("users/\(FIRAuth.auth()!.currentUser!.uid)")
@@ -93,38 +90,20 @@ class UpdateUserInfoViewController: UIViewController {
                             self.userImageView.image = UIImage(data: data)
                         }
                     }
-                    
-                    
-                    
-                    
-                    
                 }else {
                     print(error!.localizedDescription)
                     
                 }
-                
-                
             })
-            
-            
-            
-            
         }) { (error) in
             print(error.localizedDescription)
         }
-        
-        
-        
-        
     }
-
-
-
     
     @IBAction func updateInfoAction(sender: UIButton) {
         updateUserInfo(user: FIRAuth.auth()!.currentUser!, username: usernameTextField.text!, country: countryTextField.text!, biography: biographyTextField.text!, pictureData: UIImagePNGRepresentation(userImageView.image!))
     }
-
+    
     private func updateUserInfo(user: FIRUser!, username: String, country: String, biography: String, pictureData: Data!){
         
         let imagePath = "profileImage\(user.uid)/userPic.jpg"
@@ -149,11 +128,8 @@ class UpdateUserInfoViewController: UIViewController {
                     if error == nil {
                         
                         self.updateUserInfo(user:user, username: username, country: country, biography: biography)
-                        
-                        
                     }else{
                         print(error!.localizedDescription)
-                        
                     }
                 })
             }
@@ -168,7 +144,7 @@ class UpdateUserInfoViewController: UIViewController {
         let userInfo = ["username": username, "country": country, "biography":biography, "uid": user.uid, "photoURL": String(describing: user.photoURL!)]
         
         let userRef = dataBaseRef.child("users").child(user.uid)
-    
+        
         userRef.updateChildValues(userInfo) { (error, ref) in
             if error == nil {
                 print("user info updated successfully")
@@ -178,10 +154,8 @@ class UpdateUserInfoViewController: UIViewController {
             }
         }
     }
-
-        
 }
-    
+
 extension UpdateUserInfoViewController: UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource,UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func setUpPickerView(){
@@ -220,7 +194,7 @@ extension UpdateUserInfoViewController: UITextFieldDelegate, UIPickerViewDelegat
             })
         }
     }
-
+    
     func choosePictureAction(sender: AnyObject) {
         print("hhhhhh")
         let pickerController = UIImagePickerController()
@@ -351,6 +325,4 @@ extension UpdateUserInfoViewController: UITextFieldDelegate, UIPickerViewDelegat
         return label!
         
     }
-    
-    
 }

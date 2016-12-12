@@ -12,12 +12,12 @@ import FirebaseStorage
 import FirebaseAuth
 
 struct StretchyHeader {
-     let headerHeight: CGFloat = 355
-     let headerCut: CGFloat = 50
+    let headerHeight: CGFloat = 355
+    let headerCut: CGFloat = 50
 }
 
 class UserProfileTableViewController: UITableViewController {
-
+    
     @IBOutlet weak var userBiographyTextView: UITextView!
     @IBOutlet weak var userCountry: UILabel!
     @IBOutlet weak var usernameLabel: UILabel!
@@ -32,10 +32,9 @@ class UserProfileTableViewController: UITableViewController {
     }
     
     var storageRef: FIRStorage {
-     
         return FIRStorage.storage()
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -46,13 +45,12 @@ class UserProfileTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         loadUserInfo()
-
     }
-  
+    
     
     func loadUserInfo(){
-    
-    let userRef = dataBaseRef.child("users/\(FIRAuth.auth()!.currentUser!.uid)")
+        
+        let userRef = dataBaseRef.child("users/\(FIRAuth.auth()!.currentUser!.uid)")
         userRef.observe(.value, with: { (snapshot) in
             
             let user = User(snapshot: snapshot)
@@ -72,16 +70,15 @@ class UserProfileTableViewController: UITableViewController {
                     }
                 }else {
                     print(error!.localizedDescription)
-
+                    
                 }
             })
-            }) { (error) in
-                print(error.localizedDescription)
+        }) { (error) in
+            print(error.localizedDescription)
         }
     }
     
     @IBAction func unwindToProfile(storyboard: UIStoryboardSegue){}
-
     
     
     @IBAction func logOutAction(sender: AnyObject) {
@@ -89,7 +86,7 @@ class UserProfileTableViewController: UITableViewController {
         if FIRAuth.auth()!.currentUser != nil {
             // there is a user signed in
             do {
-               try? FIRAuth.auth()!.signOut()
+                try? FIRAuth.auth()!.signOut()
                 
                 if FIRAuth.auth()?.currentUser == nil {
                     let loginVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Login") as! LoginViewController
@@ -98,29 +95,21 @@ class UserProfileTableViewController: UITableViewController {
                 
             }
         }
-        
-        
     }
-
     
     
     // MARK: - Table view data source
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return 0
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         return cell
     }
-     
-
 }
-
-
-
 
 extension UserProfileTableViewController {
     
@@ -148,7 +137,6 @@ extension UserProfileTableViewController {
     }
     
     
-    
     func setNewView(){
         
         let newHeight = StretchyHeader().headerHeight - StretchyHeader().headerCut/2
@@ -167,10 +155,7 @@ extension UserProfileTableViewController {
         cutDirection.addLine(to: CGPoint(x: getHeaderFrame.width, y: getHeaderFrame.height))
         cutDirection.addLine(to: CGPoint(x: 0, y: getHeaderFrame.height - StretchyHeader().headerCut))
         newHeaderLayer.path = cutDirection.cgPath
-        
-        
-        
-        
-    }
 
+    }
+    
 }
